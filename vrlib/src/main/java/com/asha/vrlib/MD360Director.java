@@ -233,6 +233,13 @@ public class MD360Director {
 
     // call in gl thread
     public void updateSensorMatrix(float[] sensorMatrix) {
+        if (sensorMatrix == null
+                || sensorMatrix.length != 16
+                || Float.isNaN(sensorMatrix[0])
+                || Float.isNaN(sensorMatrix[1])) {
+            return;
+        }
+
         System.arraycopy(sensorMatrix, 0, mSensorMatrix, 0, 16);
         mWorldRotationMatrixInvalidate = true;
     }

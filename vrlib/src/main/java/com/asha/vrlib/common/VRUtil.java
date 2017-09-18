@@ -12,6 +12,7 @@ import com.asha.vrlib.model.MDDirectorSnapshot;
 import com.asha.vrlib.model.MDHitPoint;
 import com.asha.vrlib.model.MDRay;
 import com.asha.vrlib.model.MDVector3D;
+import com.google.vrtoolkit.cardboard.sensors.internal.Vector3d;
 
 /**
  * Created by hzqiujiadi on 16/3/13.
@@ -21,7 +22,6 @@ public class VRUtil {
 
     private static final String TAG = "VRUtil";
     private static float[] sUIThreadTmp = new float[16];
-    private static float[] sGLThreadTmp = new float[16];
 
     private static float[] sTruncatedVector = new float[4];
     private static boolean sIsTruncated = false;
@@ -80,6 +80,24 @@ public class VRUtil {
     public static void checkGLThread(String error){
         if (Looper.getMainLooper() == Looper.myLooper()) {
             throw new RuntimeException(error);
+        }
+    }
+
+    public static void checkNaN(float[] mat) {
+        if (Float.isNaN(mat[0]) || Float.isNaN(mat[1])) {
+            throw new RuntimeException("mat not a number");
+        }
+    }
+
+    public static void checkNaN(double[] mat) {
+        if (Double.isNaN(mat[0]) || Double.isNaN(mat[1])) {
+            throw new RuntimeException("mat not a number");
+        }
+    }
+
+    public static void checkNaN(Vector3d v3d) {
+        if (Double.isNaN(v3d.x) || Double.isNaN(v3d.y) || Double.isNaN(v3d.z)) {
+            throw new RuntimeException("v3d not a number");
         }
     }
 
