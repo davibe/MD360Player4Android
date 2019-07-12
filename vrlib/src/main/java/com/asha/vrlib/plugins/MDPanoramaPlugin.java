@@ -43,6 +43,7 @@ public class MDPanoramaPlugin extends MDAbsPlugin {
     @Override
     public void initInGL(Context context) {
         mProgram.build(context);
+        if (mTexture == null) { return; }
         mTexture.create();
     }
 
@@ -65,7 +66,8 @@ public class MDPanoramaPlugin extends MDAbsPlugin {
 
     @Override
     public void renderer(int index, int width, int height, MD360Director director) {
-
+        if (mTexture == null) { return; }
+        
         MDAbsObject3D object3D = mProjectionModeManager.getObject3D();
         // check obj3d
         if (object3D == null) return;
